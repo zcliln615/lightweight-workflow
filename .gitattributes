@@ -1,0 +1,4 @@
+# Keep shell scripts LF so they run on Linux/macOS/Git Bash
+*.sh text eol=lf
+*.md text
+*.ps1 text

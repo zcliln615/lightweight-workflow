@@ -1,0 +1,11 @@
+# Editor / OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Per-machine agent settings (never commit)
+.claude/settings.local.json
+
+# Task artifacts belong to the projects that use the workflow, not to this repo
+.dev/
