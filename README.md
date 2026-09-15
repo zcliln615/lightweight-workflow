@@ -1,4 +1,4 @@
-# Lightweight Learning-Oriented Agent Workflow (V1)
+# Lightweight Learning-Oriented Agent Workflow (V2)
 
 Six explicit skills, no router, no automatic chaining. Works with Claude Code and Codex.
 
@@ -12,6 +12,12 @@ Each stage runs only when you invoke it. You may skip stages.
 
 Explicit over Automatic. Artifacts over Context. Decision Trace over Tool Trace.
 Complexity-Proportional Artifacts. Evidence before Claims. No Silent Requirement Changes.
+Encode gates, not procedures.
+
+One workflow, two thinking depths: **Bounded** by default, **Deep** when interfaces,
+concurrency, external devices, or real trade-offs are involved (see `AGENTS.md`).
+`requirements.md` + optional `design.md` form the Spec; `plan.md` is only the execution
+map and is refused with `PLAN NOT READY` while the Spec has blocking gaps.
 
 ## Layout
 
@@ -52,7 +58,7 @@ Skills create `.dev/tasks/<task>/` inside the project that uses the workflow:
 
 ```
 requirements.md            /grill
-design.md                  optional, architecture-heavy tasks only
+design.md                  /brainstorm, Deep tasks
 plan.md                    /plan
 implementation-trace.md    /execute
 verification.md            optional, /verify on request

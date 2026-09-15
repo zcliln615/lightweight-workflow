@@ -18,12 +18,23 @@ Answer the question: **what exactly are we building, and how will we know it is 
 - Do not discuss implementation approaches. That is `/brainstorm`.
 - Ask only questions whose answer would change the design, scope, or acceptance criteria.
   Skip anything you can reasonably infer or that does not matter yet.
-- Ask 3 to 5 questions per round, most important first. Offer a sensible default for each
-  so the user can answer "defaults" to move fast.
-- Stop when remaining ambiguities no longer materially affect the solution. Record them
-  under Open Questions instead of asking.
+- Minimum sufficient questioning, per Adaptive Depth in AGENTS.md:
+  - **Bounded**: zero to a few high-impact questions. Batch them when independent.
+    Offer a sensible default for each so the user can answer "defaults".
+  - **Deep**: resolve one material decision at a time, because later questions often
+    depend on earlier answers. Follow dependent branches until the requirement is stable.
+  - Escalate to Deep if hidden complexity appears; say so when you do.
 - Every acceptance criterion must state how it will be verified and whether the agent can
   verify it in this environment. This is what makes `/verify` mechanical later.
+
+## Ready Criteria
+
+Grill is done only when all of these hold. Otherwise keep going or report what blocks.
+
+- Goal, scope, constraints, non-goals are clear.
+- Every ambiguity that would change the design is resolved.
+- Every acceptance criterion is observable and has a verification method.
+- No blocking open questions remain. Non-blocking ones go under Open Questions.
 
 ## Output
 

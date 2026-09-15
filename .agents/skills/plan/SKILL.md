@@ -14,14 +14,33 @@ Answer the question: **now that we know how, what exactly will be done, in what 
   or the user's current message for a simple task that skipped `/brainstorm`.
 - Relevant code, enough to name real files and functions.
 
+## Spec Readiness Gate
+
+Check before writing anything. Plan does not repair requirements or invent architecture.
+
+- A blocking requirement ambiguity exists: STOP.
+- The task is Deep (see AGENTS.md) and a design decision that the plan depends on is
+  unresolved, such as ownership, data source, protocol shape, or failure policy: STOP.
+
+When stopping, report and wait:
+
+```
+PLAN NOT READY
+Unresolved: - ... - ...
+Suggested: /grill for requirement gaps, /brainstorm for design gaps.
+```
+
 ## Rules
 
+- The plan is an execution map: what to change, where, why, in what order, how to check,
+  which AC it covers. It is not pre-written code. Leave line-level decisions to `/execute`
+  so the plan does not go stale when the codebase has something better already.
 - Steps must be small enough that each can be built and checked independently.
-  A step that touches more than a few files is probably two steps.
+  A step that touches more than a few files is probably two steps. Bounded tasks often
+  need only 1 to 4 steps.
 - Name actual files and functions. Do not write "update the relevant modules".
 - Every step lists its development check: build, a specific test, or a manual run.
-- Include a Design Summary of 5 to 15 lines. Write a separate `design.md` only when the
-  design has several non-obvious decisions or trade-offs that need their own explanation.
+- Include a Design Summary of 5 to 15 lines, or point to `design.md` when it exists.
 - Do not restate requirements. Reference them by AC id where relevant.
 - Do not plan work outside the requirements. Put temptations under Out of Scope.
 
@@ -63,5 +82,5 @@ Where this could go wrong and what to watch for during /execute.
 
 ## Finish
 
-Report the number of steps and the file written. Then stop.
+Report the number of steps and the file written, or PLAN NOT READY. Then stop.
 Do not begin implementation. `/execute` is the user's decision.

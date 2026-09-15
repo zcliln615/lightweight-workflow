@@ -28,21 +28,40 @@ Answer the question: **how might we build this, and which way is best?**
 
 ## Output
 
-Converge on a recommended design and state it compactly:
+Depth follows Adaptive Depth in AGENTS.md.
+
+**Bounded** tasks: converge on a recommended design and state it compactly. No file.
+`/plan` will carry it as the Design Summary.
 
 ```
 Recommended design
-- Architecture: ...
-- Data flow: ...
-- Key interfaces: ...
-- Key decisions and why: ...
+- Approach: ...
+- Why: ...
+- Files involved: ...
 - Risks: ...
-- Rejected alternatives (only if considered seriously): ...
 ```
 
-No file is required. Only if the design is architecture-heavy and will need to be
-understood independently later, offer to write `.dev/tasks/<task>/design.md` with those
-same sections. Otherwise `/plan` will carry a Design Summary.
+**Deep** tasks: resolve the decisions below that apply, one at a time, then write
+`.dev/tasks/<task>/design.md`. Skip sections that are irrelevant; do not fill a template.
+
+```
+# Design: <Task Name>
+## Chosen approach
+## Component boundaries
+## Data and state ownership
+## Important interfaces
+## Failure behavior
+## Concurrency and lifecycle          (if relevant)
+## External boundaries                (devices, protocols, if relevant)
+## Verification strategy
+## Rejected alternatives              (only those seriously considered)
+```
+
+## Done Criteria
+
+Brainstorm is done when the chosen approach is stated, every design decision that
+`/plan` would otherwise have to invent is settled, and `requirements.md` reflects any
+requirement facts discovered along the way. Deep tasks are not done without `design.md`.
 
 ## Finish
 

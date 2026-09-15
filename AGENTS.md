@@ -20,13 +20,39 @@ Six skills exist: `/grill`, `/brainstorm`, `/plan`, `/execute`, `/verify`, `/exp
   "build passed", not "feature works", unless you have direct evidence.
 - **No Silent Requirement Changes.** If reality conflicts with `requirements.md`, stop
   and ask. Implementation-level deviations may continue but must be recorded in the trace.
+- **Encode gates, not procedures.** Skills state what must exist before moving on and
+  what must never be crossed. They do not script how to think.
+
+## Adaptive Depth
+
+One workflow, two thinking depths. Default to **Bounded**: minimal questions, compact
+design, few plan steps. Switch to **Deep** when any of these appear, regardless of line
+count:
+
+- new or changed public interfaces or data protocols
+- responsibility changes across several modules
+- concurrency, object lifetime, state machines
+- persistence, migration, compatibility
+- external devices or networks (cameras, Jetson, ESP32, sockets)
+- performance or real-time constraints
+- more than one approach with a real trade-off
+- mistakes that would be hard to detect or hard to undo
+
+Deep tasks resolve one material decision at a time and usually produce `design.md`.
+If hidden complexity surfaces mid-stage, say so and escalate to Deep.
+
+## Spec
+
+`requirements.md` (what we promise) plus optional `design.md` (how the system works)
+together form the Spec. `plan.md` is only the execution map for that Spec. There is no
+separate `spec.md`.
 
 ## Task Directory
 
 ```
 .dev/tasks/<task-name>/
   requirements.md            written by /grill, refined by /brainstorm
-  design.md                  optional, only for architecture-heavy tasks
+  design.md                  written by /brainstorm for Deep tasks, rarely otherwise
   plan.md                    written by /plan
   implementation-trace.md    maintained by /execute
   verification.md            optional, written by /verify on request
