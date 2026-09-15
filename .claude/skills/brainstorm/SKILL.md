@@ -24,7 +24,8 @@ Answer the question: **how might we build this, and which way is best?**
 - Prefer the smallest design that satisfies the requirements and constraints.
 - If a requirement gap surfaces, ask the user one focused question, then update
   `requirements.md`. Do not reopen a full grill.
-- One topic at a time. Do not produce a wall of text covering everything at once.
+- Resolve dependent decisions one at a time. Independent decisions may be batched.
+  Do not dump the entire design in one message.
 
 ## Output
 

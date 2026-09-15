@@ -23,8 +23,9 @@ Answer the question: **does the implementation actually satisfy the original req
 - Where the AC is marked Agent-verifiable: No, or the required environment is absent,
   the result is NOT VERIFIED with the reason. Never upgrade "code looks right" to PASS.
 - Distinguish clearly: proven, inferred from reading, unable to check.
-- You may write small throwaway test or simulation scripts to gather evidence.
-  Do not fix product code here. Report failures; fixing is a new `/execute`.
+- You may write small throwaway test or simulation scripts to gather evidence. Remove
+  them before finishing unless the user asks to keep them or they earn a place as
+  permanent tests. Do not fix product code here. Report failures; fixing is a new `/execute`.
 
 ## Results
 

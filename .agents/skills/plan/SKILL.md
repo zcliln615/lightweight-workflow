@@ -35,9 +35,9 @@ Suggested: /grill for requirement gaps, /brainstorm for design gaps.
 - The plan is an execution map: what to change, where, why, in what order, how to check,
   which AC it covers. It is not pre-written code. Leave line-level decisions to `/execute`
   so the plan does not go stale when the codebase has something better already.
-- Steps must be small enough that each can be built and checked independently.
-  A step that touches more than a few files is probably two steps. Bounded tasks often
-  need only 1 to 4 steps.
+- A step ends in one coherent, independently checkable state. Split by behavior or
+  dependency boundary, not by file count: an API rename touching seven files is still one
+  step. Bounded tasks often need only 1 to 4 steps.
 - Name actual files and functions. Do not write "update the relevant modules".
 - Every step lists its development check: build, a specific test, or a manual run.
 - Include a Design Summary of 5 to 15 lines, or point to `design.md` when it exists.

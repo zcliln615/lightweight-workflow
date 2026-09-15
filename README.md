@@ -50,7 +50,8 @@ Cursor: reference `AGENTS.md` from `.cursor/rules` and paste a SKILL.md when inv
 ## Editing skills
 
 Edit only `.claude/skills/<name>/SKILL.md`, then run `scripts/sync-skills.ps1` (or `.sh`)
-so the Codex copy stays identical.
+so the Codex copy stays identical. `scripts/check-sync.*` fails if the two drift, and the
+GitHub Actions workflow runs it on every push.
 
 ## Task artifacts
 

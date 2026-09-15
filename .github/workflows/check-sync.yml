@@ -1,0 +1,8 @@
+name: check-sync
+on: [push, pull_request]
+jobs:
+  skills-in-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sh scripts/check-sync.sh
