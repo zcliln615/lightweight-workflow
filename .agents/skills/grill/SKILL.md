@@ -9,13 +9,14 @@ Answer the question: **what exactly are we building, and how will we know it is 
 
 ## Entry
 
-Classify the command argument by string match, before anything else:
+Classify the command argument by its first whitespace-separated token, before anything
+else:
 
 1. Empty: refine the active task (AGENTS.md Task resolution). None active: ask the user
    to state the requirement with `/grill new ...`.
-2. Starts with the name of an existing `.dev/tasks/` directory: operate on that task;
-   the rest is new input (an extension or clarification). Write `.dev/active-task`.
-3. Starts with `new`: the rest is the requirement statement for a new task. Run the
+2. First token exactly matches an existing `.dev/tasks/` directory name: operate on that
+   task; the rest is new input (an extension or clarification). Write `.dev/active-task`.
+3. First token is `new`: the rest is the requirement statement for a new task. Run the
    Boundary Round below. Write nothing until the user confirms.
 4. Anything else: input for the active task, as in 1.
 

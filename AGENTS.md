@@ -66,14 +66,14 @@ separate `spec.md`.
 It is per checkout, not per conversation; parallel conversations on one checkout must
 name their task explicitly. Do not commit it.
 
-`.dev/active-task` changes only by:
-1. Explicit user selection or creation: `/grill new <requirement>` after the user
+`.dev/active-task` may be written by:
+1. Explicit user task selection or creation: `/grill new <requirement>` after the user
    confirms the proposed name; any stage invoked with an existing task name
    (`/verify camera-sync`); a direct instruction such as "switch to udp-protocol".
-2. Deterministic bootstrap: exactly one task exists and no active task is set.
+2. Deterministic single-task bootstrap: exactly one task exists and no active task is set.
 
-Semantic inference, task mentions in prose, artifact reads, and modification time
-never change it.
+It is never changed by semantic inference, conversation history, task mentions in
+prose, artifact reads, or modification time.
 
 Task resolution, used by every skill and by any reply that edits code or artifacts.
 Never use conversation history for this.
