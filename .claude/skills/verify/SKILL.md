@@ -9,6 +9,7 @@ Answer the question: **does the implementation actually satisfy the original req
 
 ## Inputs
 
+- `<task>` per Task resolution in AGENTS.md.
 - `.dev/tasks/<task>/requirements.md` (required, especially the Acceptance Criteria).
 - `.dev/tasks/<task>/implementation-trace.md`, `plan.md`, `design.md` if present.
 - Current source code and existing tests.

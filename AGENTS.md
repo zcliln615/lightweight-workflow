@@ -50,6 +50,7 @@ separate `spec.md`.
 ## Task Directory
 
 ```
+.dev/active-task             one line, the task unnamed work binds to (see Active Task)
 .dev/tasks/<task-name>/
   requirements.md            written by /grill, refined by /brainstorm
   design.md                  written by /brainstorm for Deep tasks, rarely otherwise
@@ -59,29 +60,71 @@ separate `spec.md`.
   learning.md                optional, written by /explain on request
 ```
 
-Task resolution order, used by every skill:
-1. Task named in the command (`/verify camera-sync`).
-2. Task clearly established earlier in this conversation.
-3. Exactly one plausible directory under `.dev/tasks/`.
-4. Otherwise ask. Never guess by modification time.
+## Active Task
 
-Always state which task you are operating on in the first line of your reply.
+`.dev/active-task` holds one line: the name of the task that all unnamed work binds to.
+It is per checkout, not per conversation; parallel conversations on one checkout must
+name their task explicitly. Do not commit it.
+
+Only explicit user action writes this file:
+- `/grill new <requirement>`: after the user confirms the proposed name, the task is
+  created and becomes active.
+- Any stage invoked with an existing task name (`/verify camera-sync`) switches to it.
+- A direct instruction such as "switch to udp-protocol" switches to it.
+
+Nothing else writes it. Mentioning a task in prose, or reading its artifacts, never switches.
+
+Task resolution, used by every skill and by any reply that edits code or artifacts.
+Never use conversation history for this.
+1. Task named in the command.
+2. `.dev/active-task`, if that directory exists.
+3. Exactly one directory under `.dev/tasks/`: adopt it and write `.dev/active-task`.
+4. Otherwise list the tasks and ask. Never guess by modification time.
+
+Every reply that edits code or artifacts starts with `Task: <name>`, adding
+`(switched from <old>)` on the reply that switched, or `Task: none` when unbound.
+Pure questions and discussion need no task and no first line.
+
+## Scope Guard
+
+Reading code, reading any task's artifacts, and discussion are free. Before writing
+code or artifacts, classify the request against the active task:
+
+- **IN**: covered by `requirements.md`. Proceed. An unplanned but in-scope edit gets one
+  trace entry marked `Unplanned`.
+- **EXTENSION**: needs a new or changed requirement or AC. Stop with SCOPE CHECK.
+- **BOUNDARY**: matches another existing task, or hits this task's Non-goals or the
+  plan's Out of Scope. Stop with SCOPE CHECK.
+
+```
+SCOPE CHECK
+Task: camera-sync
+Request: ...
+Why: Non-goals says "..." | would change AC-02 | matches task udp-protocol
+Options: 1. extend this task (requirements.md updated first)
+         2. new task: /grill new <description>
+         3. discuss only, write nothing
+```
+
+The guard proposes; it never writes `.dev/active-task` and never creates a task.
 
 ## Learner Profile
 
-The developer is learning modern C++ and software engineering, working mainly on
-C/C++, embedded (ESP32, Jetson), OpenCV and computer vision projects.
+The developer has partial C++11 knowledge, basic STM32 embedded experience,
+basic Linux/Jetson development experience, OpenCV fundamentals, and experience
+training MMPose models mainly through dataset/config adaptation rather than model modification.
 
-Comfortable with: basic C/C++, common STL containers, OpenCV fundamentals, basic CMake.
+Currently developing deeper understanding of modern C++, ownership/lifetime, concurrency,
+software architecture, Linux/Jetson engineering, and computer-vision/model internals.
 
-Currently learning: RAII and ownership, smart pointers, concurrency, software
-architecture, reading and reviewing code.
-
-When explaining: prioritize business logic and design intent, explain non-obvious modern
-C++ constructs, skip basic syntax unless asked, and point to a small number of code
-locations worth studying.
+When explaining, prioritize business logic, data flow, design intent, ownership/lifetime,
+and non-obvious implementation choices. Skip basic syntax unless needed and point to
+a small number of high-value code locations to study.
 
 ## Out of Scope for This Workflow
 
 No skill router, no automatic chaining, no mandatory TDD, worktrees, subagents, or code
 review. These may be added later as optional capabilities, never as infrastructure.
+
+No task stack, session id, task status field, stage pointer, or automatic task closing.
+`.dev/active-task` stays one line; stage progress is derived from the artifacts.

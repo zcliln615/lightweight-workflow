@@ -9,6 +9,7 @@ Answer the question: **how might we build this, and which way is best?**
 
 ## Inputs
 
+- `<task>` per Task resolution in AGENTS.md.
 - `.dev/tasks/<task>/requirements.md`. If missing, ask whether to run `/grill` first or
   proceed from the user's description. Do not run `/grill` yourself.
 - Relevant existing code: interfaces, data structures, threading, build setup.

@@ -14,4 +14,5 @@ done
 mkdir -p "$1/.claude/skills" "$1/.agents/skills" "$1/.dev/tasks"
 cp -R "$root/.claude/skills/." "$1/.claude/skills/"
 cp -R "$root/.agents/skills/." "$1/.agents/skills/"
+grep -qx '.dev/active-task' "$1/.gitignore" 2>/dev/null || printf '\n# Per-checkout workflow pointer\n.dev/active-task\n' >> "$1/.gitignore"
 echo "Installed workflow into $1"

@@ -12,6 +12,9 @@ Answer the question: **as a learner, what should I understand about this code, a
 - The Learner Profile in AGENTS.md. It decides what to explain and what to skip.
 - The user's current message. It sets the scope:
   - `/explain` : the whole task, top-down.
+  - `/explain <task>` : that task, if the argument names an existing `.dev/tasks/`
+    directory (this switches the active task per AGENTS.md). Otherwise the argument is
+    a scope, as below.
   - `/explain <file or function>` : that code only.
   - `/explain <question>` : answer that question only.
   - `/explain <topic>` such as "only the threading" : that aspect only.

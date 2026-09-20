@@ -15,4 +15,8 @@ foreach ($d in '.claude\skills', '.agents\skills') {
     Copy-Item -Recurse -Force (Join-Path $root "$d\*") (Join-Path $Target $d)
 }
 New-Item -ItemType Directory -Force (Join-Path $Target '.dev\tasks') | Out-Null
+$gi = Join-Path $Target '.gitignore'
+if (-not (Test-Path $gi) -or -not (Select-String -Path $gi -Pattern '^\.dev/active-task$' -Quiet)) {
+    Add-Content $gi "`n# Per-checkout workflow pointer`n.dev/active-task"
+}
 Write-Host "Installed workflow into $Target"

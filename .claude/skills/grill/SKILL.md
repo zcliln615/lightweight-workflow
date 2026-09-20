@@ -7,9 +7,57 @@ description: Clarify a requirement by asking only the questions that materially 
 
 Answer the question: **what exactly are we building, and how will we know it is done?**
 
+## Entry
+
+Classify the command argument by string match, before anything else:
+
+1. Empty: refine the active task (AGENTS.md Task resolution). None active: ask the user
+   to state the requirement with `/grill new ...`.
+2. Starts with the name of an existing `.dev/tasks/` directory: operate on that task;
+   the rest is new input (an extension or clarification). Write `.dev/active-task`.
+3. Starts with `new`: the rest is the requirement statement for a new task. Run the
+   Boundary Round below. Write nothing until the user confirms.
+4. Anything else: input for the active task, as in 1.
+
+## Boundary Round (`new` only)
+
+Check, from artifacts only:
+- Overlap: does the statement fall inside an existing task's Requirements? Say so and
+  ask whether to create anyway or extend that task. Does an existing Non-goals contain a
+  pointer such as "separate task: udp-protocol"? Reuse that name.
+- Split: more than one independently verifiable deliverable? Propose one line per task
+  with name and boundary; the user picks one. The others become Out pointers in the
+  chosen task's Non-goals only; never create their directories.
+
+Then propose and wait:
+
+```
+Task: <name> (proposed)
+Goal: one sentence
+In: ...
+Out: ...
+Overlap: (only if any)
+Questions: (first round, each with a default)
+```
+
+"ok" or "defaults" accepts everything; the user may edit any line. The user owns the
+boundary; you only surface evidence. After confirmation: create the directory, write
+`.dev/active-task`, write the requirements.md draft with Goal and Non-goals from the
+boundary, and reply with `Task: <name> (created)`.
+
+## Naming
+
+- kebab-case ASCII, 2 to 4 words, even when the requirement is written in Chinese.
+- Name the subject that changes: component, capability, protocol. Not the symptom, not
+  the stage. A verb prefix only when the verb is the point (`fix-`, `migrate-`).
+- If the best name matches an existing directory, say so: the request may belong there.
+  Never append a suffix to disambiguate.
+- Frozen once `plan.md` exists. Before that, rename on request by moving the directory
+  and updating `.dev/active-task`.
+
 ## Inputs
 
-- The user's requirement statement (current message or the task named in the command).
+- The requirement statement from the Entry rules above.
 - Existing `.dev/tasks/<task>/requirements.md` if present (resume, do not restart).
 - Relevant code only when needed to know what already exists.
 
@@ -38,8 +86,8 @@ Grill is done only when all of these hold. Otherwise keep going or report what b
 
 ## Output
 
-Write `.dev/tasks/<task-name>/requirements.md`. Propose a short kebab-case task name if
-the user did not give one. Write a draft after the first round and refine it each round.
+Write `.dev/tasks/<task-name>/requirements.md`. Write a draft after the first round
+(for `new`, after the Boundary Round is confirmed) and refine it each round.
 
 ```md
 # <Task Name>

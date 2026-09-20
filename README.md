@@ -58,6 +58,7 @@ GitHub Actions workflow runs it on every push.
 Skills create `.dev/tasks/<task>/` inside the project that uses the workflow:
 
 ```
+.dev/active-task           the task unnamed work binds to; written only by explicit user action
 requirements.md            /grill
 design.md                  /brainstorm, Deep tasks
 plan.md                    /plan
@@ -66,4 +67,17 @@ verification.md            optional, /verify on request
 learning.md                optional, /explain on request
 ```
 
-Commit `.dev/` in that project if you want the task history kept with the code.
+Commit `.dev/` in that project if you want the task history kept with the code, but keep
+`.dev/active-task` ignored (the installer adds it to `.gitignore`).
+
+## Tasks in one conversation
+
+```
+/grill new <requirement>      agent proposes a name and boundary; you confirm; task becomes active
+/plan                         unnamed stages bind to .dev/active-task, never to chat history
+/verify camera-sync           naming a task switches to it; the reply says "switched from"
+"顺便优化一下"                in-scope edit: done, one Unplanned trace entry
+"重新设计 UDP 包格式"          out of scope: SCOPE CHECK, you choose extend / new task / discuss
+```
+
+Each reply that edits code or artifacts starts with `Task: <name>`. Discussion is free.

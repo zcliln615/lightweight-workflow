@@ -9,6 +9,7 @@ Answer the question: **build it as planned, and leave a readable record.**
 
 ## Inputs
 
+- `<task>` per Task resolution in AGENTS.md.
 - `.dev/tasks/<task>/plan.md` (required). Without it, ask whether to proceed from a
   user-provided plan or run `/plan` first. Do not run `/plan` yourself.
 - `.dev/tasks/<task>/requirements.md`, `design.md` if present.
@@ -22,7 +23,9 @@ Answer the question: **build it as planned, and leave a readable record.**
 - You may search, read, create and modify files, build, lint, run unit tests, and debug.
 - A passing build or test is a development check, not requirement verification.
   Never claim a requirement is satisfied. Say what was checked.
-- Do not refactor or improve code outside the plan's scope, even if tempting.
+- Do not refactor or improve code outside the plan's scope, even if tempting. If the
+  user asks for such a change mid-execute, apply the Scope Guard in AGENTS.md: in-scope
+  edits proceed and get an `Unplanned` trace entry; anything else stops with SCOPE CHECK.
 - For large codebases, delegate broad searches to a subagent and keep only conclusions.
 
 ## Plan Deviations
@@ -56,6 +59,7 @@ Reason: why this way.
 Files: path, path
 Check: build passed | test_x passed | not yet checked
 Deviation: (only if any)
+Unplanned: (only for in-scope edits the user asked for outside the plan)
 ```
 
 Never record: shell commands, files read, searches, or your reasoning process.

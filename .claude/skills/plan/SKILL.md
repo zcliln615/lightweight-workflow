@@ -9,6 +9,7 @@ Answer the question: **now that we know how, what exactly will be done, in what 
 
 ## Inputs
 
+- `<task>` per Task resolution in AGENTS.md.
 - `.dev/tasks/<task>/requirements.md` (required; if missing, ask how to proceed).
 - `.dev/tasks/<task>/design.md` if present, or the design agreed in this conversation,
   or the user's current message for a simple task that skipped `/brainstorm`.
