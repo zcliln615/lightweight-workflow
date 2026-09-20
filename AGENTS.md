@@ -66,13 +66,14 @@ separate `spec.md`.
 It is per checkout, not per conversation; parallel conversations on one checkout must
 name their task explicitly. Do not commit it.
 
-Only explicit user action writes this file:
-- `/grill new <requirement>`: after the user confirms the proposed name, the task is
-  created and becomes active.
-- Any stage invoked with an existing task name (`/verify camera-sync`) switches to it.
-- A direct instruction such as "switch to udp-protocol" switches to it.
+`.dev/active-task` changes only by:
+1. Explicit user selection or creation: `/grill new <requirement>` after the user
+   confirms the proposed name; any stage invoked with an existing task name
+   (`/verify camera-sync`); a direct instruction such as "switch to udp-protocol".
+2. Deterministic bootstrap: exactly one task exists and no active task is set.
 
-Nothing else writes it. Mentioning a task in prose, or reading its artifacts, never switches.
+Semantic inference, task mentions in prose, artifact reads, and modification time
+never change it.
 
 Task resolution, used by every skill and by any reply that edits code or artifacts.
 Never use conversation history for this.
@@ -81,9 +82,9 @@ Never use conversation history for this.
 3. Exactly one directory under `.dev/tasks/`: adopt it and write `.dev/active-task`.
 4. Otherwise list the tasks and ask. Never guess by modification time.
 
-Every reply that edits code or artifacts starts with `Task: <name>`, adding
-`(switched from <old>)` on the reply that switched, or `Task: none` when unbound.
-Pure questions and discussion need no task and no first line.
+Every workflow skill reply, and every reply that edits code or artifacts, starts with
+`Task: <name>`, adding `(switched from <old>)` on the reply that switched, or
+`Task: none` when unbound. Pure discussion outside a skill needs no first line.
 
 ## Scope Guard
 
